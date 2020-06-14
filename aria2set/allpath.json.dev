@@ -1,0 +1,5 @@
+{
+	"rclone_conf": "D:/Users/Steve_Chung/Desktop/rclonearia/aria2set/temp/rclone.conf",
+	"autoupload": "D:/Users/Steve_Chung/Desktop/rclonearia/aria2set/temp/autoupload.sh",
+	"aria2_conf": "D:/Users/Steve_Chung/Desktop/rclonearia/aria2set/temp/aria2.conf"
+}

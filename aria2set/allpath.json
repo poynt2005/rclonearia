@@ -1,0 +1,5 @@
+{
+	"rclone_conf": "/root/.config/rclone/rclone.conf",
+	"autoupload": "/root/.aria2c/autoupload.sh",
+	"aria2_conf": "/root/.aria2c/aria2.conf"
+}

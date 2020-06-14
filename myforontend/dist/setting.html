@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>自動同步助手</title>
+  </head>
+  <body>
+    
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Rclone+Aria2自動同步</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="mynavbar">
+			<ul class="navbar-nav">
+				<a class="nav-link" href="https://github.com/poynt2005" rel="noopener" target="_blank">GitHub</a>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<h2>Rclone+Aria2下載助手--設定頁面</h2>
+		<div class="main-inner thin-border">
+			<h3>說明</h3>
+			<div>Aria2是一個非常棒的下載器，支援分割檔案，多線程下載</div>
+			<div>Rclone則是可以自動同步資料、檔案到雲端硬碟的神器</div>
+			<div>兩者結合，並且掛在服務器上，就能實現雲段硬碟的離線下載!!</div>
+			<div>本項目使用docker打包，使用說明如下</div>
+			<div>
+				<ol>
+					<li>下載Rclone，運行rclone config，生成rclone.conf檔</li>
+					<li>下面表格填好，上傳</li>
+					<li>啟動Service</li>
+				</ol>
+			</div>
+		</div>
+		
+		<div class="main-inner thin-border">
+			<form>
+				<div class="form-group">
+					<label for="driveName">輸入硬碟名稱</label>
+					<input type="text" class="form-control" id="driveName" placeholder="請輸入硬碟名稱">
+				</div>
+				<div class="form-group">
+					<label for="uploadDir">輸入上傳目錄</label>
+					<input type="text" class="form-control" id="uploadDir" placeholder="請輸入硬碟的上傳目錄">
+				</div>
+				<div class="form-group">
+					<label for="rloneconf">輸入rclone.conf</label>
+					<textarea type="text" class="form-control" id="rloneconf" rows="10"></textarea>
+				</div>
+				
+				<button id="submitData" type="button" class="btn btn-primary">確定上傳</button>
+				<button id="clearData" type="button" class="btn btn-danger">清除重填</button>
+			</form>
+		</div>
+		
+		<div class="main-inner thin-border">
+			<h3>啟動</h3>
+			<div>表格上傳完畢後必須啟動</div>
+			
+			<button id="serviceOn" type="button" class="btn btn-primary">啟動Service</button>
+			<button id="serviceClose" type="button" class="btn btn-danger">關閉Service</button>
+		</div>
+	</div>
+	
+    <script src="main.moral.js"></script>
+  </body>
+</html>

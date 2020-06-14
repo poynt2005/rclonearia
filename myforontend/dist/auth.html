@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>伺服器驗證</title>
+  </head>
+  <body>
+    
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Rclone+Aria2自動同步</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="mynavbar">
+			<ul class="navbar-nav">
+				<a class="nav-link" href="https://github.com/poynt2005" rel="noopener" target="_blank">GitHub</a>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<h2>伺服器驗證</h2>
+		<div class="main-inner thin-border">
+			<h3>說明</h3>
+			<div>本頁面會包含一些伺服器端的敏感資訊</div>
+			<div>請進行認證，OK?</div>
+		</div>
+		<div class="main-inner thin-border">
+			<form>
+				<div class="form-group">
+					<label for="password">輸入密碼</label>
+					<input type="password" class="form-control col-md-5" id="password" placeholder="請輸入密碼">
+				</div>				
+				<button id="submitData" type="button" class="btn btn-primary">確定</button>
+				<button id="clearData" type="button" class="btn btn-danger">清除重填</button>
+			</form>
+		</div>
+	</div>
+    <script src="auther.moral.js"></script>
+  </body>
+</html>
