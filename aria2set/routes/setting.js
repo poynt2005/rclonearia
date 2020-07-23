@@ -4,7 +4,7 @@ var fs = require("fs");
 var exec = util.promisify(require('child_process').exec);
 var path = require("path");
 
-var filePath = JSON.parse(fs.readFileSync(path.join(__dirname, "../allpath.json")));
+var filePath = JSON.parse(fs.readFileSync(path.join(__dirname, "../allpath.json"), "utf8"));
 
 router.get('/', async(ctx, next) => {	 
 	const isLogin = ctx.isLogin();
@@ -15,8 +15,12 @@ router.get('/', async(ctx, next) => {
 	}
 	else{
 		
-		var aria2Conf = fs.readFileSync(path.join(filePath.aria2_conf), "utf8");
-		var rpcSecret = aria2Conf.match(/rpc\-secret=(.+)?/)[0].replace("rpc-secret=", "");
+		var rpcSecret = process.env.RPCSECRET;
+		
+		if(typeof rpcSecret == "undefined"){
+			let aria2Conf = fs.readFileSync(path.resolve(filePath.aria2_conf), "utf8");
+			rpcSecret = aria2Conf.match(/rpc\-secret=(.+)?/)[0].replace("rpc-secret=", "");
+		}
 		
 		ctx.status = 200;
 		await ctx.render('setting', {rpcSecret});
@@ -38,11 +42,11 @@ router.post("/", async(ctx, next) => {
 	
 	
 	try{
-		var autoUploadSH = fs.readFileSync(path.join(filePath.autoupload), "utf8");
-		autoUploadSH = autoUploadSH.replace(/DRIVE_NAME=(.+)?/, `DRIVE_NAME='${drive_name}'`);
-		autoUploadSH = autoUploadSH.replace(/DRIVE_PATH=(.+)?/, `DRIVE_PATH='${drive_path}'`);
+		var autoUploadSH = fs.readFileSync(path.resolve(filePath.autoupload), "utf8");
+		autoUploadSH = autoUploadSH.replace(/drive\-name=(.+)?/, `drive-name=${drive_name}`);
+		autoUploadSH = autoUploadSH.replace(/drive\-dir=(.+)?/, `drive-dir=${drive_path}`);
 		
-		fs.writeFileSync(path.join(filePath.autoupload), autoUploadSH);
+		fs.writeFileSync(path.resolve(filePath.autoupload), autoUploadSH, "utf8");
 		result.autoUploadSH = "Already Set";
 		
 	}
@@ -52,9 +56,9 @@ router.post("/", async(ctx, next) => {
 	}
 	
 	try{
-		fs.writeFileSync(path.join(filePath.rclone_conf), rclone_conf);
+		fs.writeFileSync(path.resolve(filePath.rclone_conf), rclone_conf, "utf8");
 		
-		if(fs.existsSync(path.join(filePath.rclone_conf)))
+		if(fs.existsSync(path.resolve(filePath.rclone_conf)))
 			result.rcloneConf = "Already Set";
 	}
 	catch(e){
@@ -63,10 +67,10 @@ router.post("/", async(ctx, next) => {
 	}
 	
 	try{
-		var aria2Conf = fs.readFileSync(path.join(filePath.aria2_conf), "utf8");
-		aria2Conf = aria2Conf.replace(/on\-download\-complete=(.+)?/, `on-download-complete=${filePath.autoupload}`);
+		var aria2Conf = fs.readFileSync(path.resolve(filePath.aria2_conf), "utf8");
+		aria2Conf = aria2Conf.replace(/on\-download\-complete=(.+)?/, "on-download-complete=/root/.aria2c/upload.sh");
 		
-		fs.writeFileSync(path.join(filePath.aria2_conf), aria2Conf);
+		fs.writeFileSync(path.resolve(filePath.aria2_conf), aria2Conf, "utf8");
 		result.aria2Conf = "Already Set";
 	}
 	catch(e){

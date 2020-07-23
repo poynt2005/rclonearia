@@ -57,13 +57,13 @@ $(document).ready(() => {
 		fetch("/setting/start", {
 			method: "POST",
 			credentials: 'same-origin'
-		}).then(e => alert(e))
+		}).then(e => alert(JSON.stringify(e)))
 	})
 	
 	$('#serviceClose').click(() => {
 		fetch("/setting/stop", {
 			method: "POST",
 			credentials: 'same-origin'
-		}).then(e => alert(e))
+		}).then(e => alert(JSON.stringify(e)))
 	})
 })

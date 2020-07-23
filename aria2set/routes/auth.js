@@ -13,7 +13,7 @@ router.get('/', async(ctx, next) => {
 });
 
 router.post('/', async(ctx, next) => {
-	const password = process.env.ASSESS_SECRET || "[s3~!qF[P8(h8T3)J9m&d4z-!GW:";
+	const password = process.env.ASSESS_SECRET;
 	
 	if(ctx.request.body.pass.toString() != password){
 		ctx.status = 200;
